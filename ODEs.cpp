@@ -6,27 +6,27 @@ using namespace std;
 
 //float años = pow(31.54,7);
 
-void dxdt_x(float t_i, float x_i, float v_x);
-void dvdt_x(float t_i, float x_i, float v_x);
+float dxdt_x(float t_i, float x_i, float v_x);
+float dvdt_x(float t_i, float x_i, float v_x);
 
-void dxdt_y(float t_i, float y_i, float v_y);
-void dvdt_y(float t_i, float y_i, float v_y);
+float dxdt_y(float t_i, float y_i, float v_y);
+float dvdt_y(float t_i, float y_i, float v_y);
 
-void euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-void leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-void rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
 
-void dxdt_x(float t_i, float x_i, float v_x)
+float dxdt_x(float t_i, float x_i, float v_x)
 {
     return v_x;
 }
 
-void dxdt_y(float t_i, float y_i, float v_y);
+float dxdt_y(float t_i, float y_i, float v_y)
 {
     return v_y;
 }
 
-void dvdt_x(float t_i, float x_i, float v_x)
+float dvdt_x(float t_i, float x_i, float v_x)
 {
     float G = pow(-66.7, -11);
     float M = pow(19.89, 30);
@@ -34,15 +34,15 @@ void dvdt_x(float t_i, float x_i, float v_x)
     return G*M*x_i/AU;
 }
 
-void dvdt_y(float t_i, float y_i, float v_y)
+float dvdt_y(float t_i, float y_i, float v_y)
 {
     float G = pow(-66.7, -11);
     float M = pow(19.89, 30);
-    flaot AU = 1;
+    float AU = 1;
     return G*M*y_i/AU;
 }
 
-void euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -74,7 +74,7 @@ void euler(double a, double b, double dxy , int puntos, float xi, float yi, floa
         vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],vy[i-1]));  
     }    
 }
-void leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -107,7 +107,7 @@ void leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, f
     }    
 }
 
-void rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -169,6 +169,17 @@ void rungekutta(double a, double b, double dxy , int puntos, float xi, float yi,
 
 int main()
 {
+    float x_in = 0.1163;
+    float y_in = 0.9772;
+    float vx_i = -6.35;
+    float vy_i = 0.606;
+    double d_xy = 0.01;
+    double a1 = 0;
+    double b1 = 200;
+    
+    euler(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    leapfrog(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    rungekutta(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
     
     return 0;
 }
