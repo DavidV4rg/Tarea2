@@ -31,7 +31,7 @@ float dvdt_x(float t_i, float x_i, float v_x)
     float G = pow(-66.7, -11);
     float M = pow(19.89, 30);
     float AU = 1;    
-    return G*M*x_i/AU;
+    return G*M*0.1163/AU;
 }
 
 float dvdt_y(float t_i, float y_i, float v_y)
@@ -39,7 +39,7 @@ float dvdt_y(float t_i, float y_i, float v_y)
     float G = pow(-66.7, -11);
     float M = pow(19.89, 30);
     float AU = 1;
-    return G*M*y_i/AU;
+    return G*M*0.9772/AU;
 }
 
 float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
@@ -151,8 +151,8 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
         k4v_x = dxy*dvdt_x(t[i-1]+dxy, x[i-1]+k3x, vx[i-1]+k3v_x);
         
         
-        k1y = dxy*dxdt_y(t[i-1],x[i-1],vx[i-1]);
-        k1v_y = dxy*dvdt_y(t[i-1], x[i-1], vx[i-1]);
+        k1y = dxy*dxdt_y(t[i-1],y[i-1],vy[i-1]);
+        k1v_y = dxy*dvdt_y(t[i-1], y[i-1], vy[i-1]);
         
         k2y = dxy*dxdt_y(t[i-1]+dxy/2, y[i-1]+k1y/2, vy[i-1]+k1v_y/2);
         k2v_y = dxy*dvdt_y(t[i-1]+dxy/2, y[i-1]+k1y/2, vy[i-1]+k1v_y/2);
