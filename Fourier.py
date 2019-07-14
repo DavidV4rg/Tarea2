@@ -23,35 +23,35 @@ plt.colorbar()
 plt.savefig("FFT2D2.png")
 
 #Se crean los filtros de la imagen
-filtro1 = 0.01
-index1 = np.where(trans1 < filtro1)
+filtro1 = 90
+index1 = np.where(trans1 > filtro1)
 trans1[index1] = 0
 
 plt.figure()
 plt.imshow(np.abs(trans1), norm = LogNorm())
-plt.savefig("flitro imagen 1")
+plt.savefig("flitro_imagen_1")
 
-filtro2 = 150
+filtro2 = 90
 index2 = np.where(trans2 > filtro2)
 trans2[index2] = 0
 
 plt.figure()
 plt.imshow(np.abs(trans2), norm = LogNorm())
-plt.savefig("filtro imagen 2")
+plt.savefig("filtro_imagen_2")
 
 filt1 = ifft2(trans1)
 plt.figure()
 plt.imshow(np.real(filt1), plt.cm.gray)
-plt.savefig("im1 flitrada")
+plt.savefig("im1_flitrada")
 
 filt2 = ifft2(trans2)
 plt.figure()
 plt.imshow(np.real(filt2), plt.cm.gray)
-plt.savefig("im2 filtrada")
+plt.savefig("im2_filtrada")
 
 plt.figure()
-plt.imshow(np.real(filt1), plt.cm.gray)
 plt.imshow(np.real(filt2), plt.cm.gray)
+plt.imshow(np.real(filt1), plt.cm.gray)
 plt.savefig("hibrida")
 
 
