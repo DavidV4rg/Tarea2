@@ -12,9 +12,9 @@ float dvdt_x(float t_i, float x_i, float v_x);
 float dxdt_y(float t_i, float y_i, float v_y);
 float dvdt_y(float t_i, float y_i, float v_y);
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float euler(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float leapfrog(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float rungekutta(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
 
 //Derivada de la posición en la dimensión x
 
@@ -52,7 +52,7 @@ float dvdt_y(float t_i, float y_i, float v_y)
 
 //Método de euler para resolver la ecuación diferencial
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float euler(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -67,8 +67,7 @@ float euler(double a, double b, double dxy , int puntos, float xi, float yi, flo
     vx[0]=vxi;
     vy[0]=vyi;
        
-    //Arreglo del tiempo
-    double dt = b-a/puntos;    
+    //Arreglo del tiempo   
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -84,7 +83,7 @@ float euler(double a, double b, double dxy , int puntos, float xi, float yi, flo
 }
 
 //Método de LeapFrog para resolver la ecuación diferencial
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float leapfrog(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -100,8 +99,6 @@ float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, 
     vy[0]=vyi;
         
     //Arreglo del tiempo
-    
-    double dt = b-a/puntos;
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -117,7 +114,7 @@ float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, 
 }
 
 //Método de Runge Kutta para resolver la ecuación
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float rungekutta(double dt, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
 {
     float t[puntos];
     float x[puntos];
@@ -139,8 +136,7 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
     float k1v_y, k2v_y, k3v_y, k4v_y;
     float meanx, meany, meanv_x, meanv_y;
     
-    //Arreglo del tiempo
-    double dt = b-a/puntos;
+    //Arreglo del tiempo    
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -195,12 +191,10 @@ int main()
     float vx_i = -6.35;
     float vy_i = 0.606;
     double d_xy = 0.01;
-    double a1 = 0;
-    double b1 = 200;
     
-    euler(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
-    leapfrog(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
-    rungekutta(a1, b1, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    euler(0.01, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    leapfrog(0.01, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    rungekutta(0.01, d_xy, 300, x_in, y_in, vx_i, vy_i);
     
     return 0;
 }
