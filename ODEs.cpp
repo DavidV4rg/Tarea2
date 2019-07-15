@@ -172,6 +172,17 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
         
         k4y = dxy*dxdt_y(t[i-1]+dxy, y[i-1]+k3y, vy[i-1]+k3v_y);
         k4v_y = dxy*dvdt_y(t[i-1]+dxy, y[i-1]+k3y, vy[i-1]+k3v_y);   
+        
+        
+        meanx = (1/6)*(k1x+2*k2x+2*k3x+k4x);
+        meany = (1/6)*(k1y+2*k2y+2*k3y+k4y);
+        meanv_x = (1/6)*(k1v_x+2*k2v_x+2*k3v_x+k4v_x);
+        meanv_y = (1/6)*(k1v_y+2*k2v_y+2*k3v_y+k4v_y);
+        
+        x[i] = x[i-1]+meanx;
+        y[i] = y[i-1]+meany;
+        vx[i] = vx[i-1]+meanv_x;
+        vy[i] = vy[i-1]+meanv_y;
     }
     
     
