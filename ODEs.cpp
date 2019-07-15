@@ -12,9 +12,9 @@ float dvdt_x(float t_i, float x_i, float v_x);
 float dxdt_y(float t_i, float y_i, float v_y);
 float dvdt_y(float t_i, float y_i, float v_y);
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi);
+float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name);
+float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name1);
+float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name2);
 
 //Derivada de la posición en la dimensión x
 
@@ -52,10 +52,10 @@ float dvdt_y(float t_i, float y_i, float v_y)
 
 //Método de euler para resolver la ecuación diferencial
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name)
 {
     ofstream outfile;
-    outfile.open("euler.dat");
+    outfile.open(name);
     float t[puntos];
     float x[puntos];
     float y[puntos];
@@ -92,10 +92,10 @@ float euler(double a, double b, double dxy , int puntos, float xi, float yi, flo
 }
 
 //Método de LeapFrog para resolver la ecuación diferencial
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name1)
 {
     ofstream outfile1;
-    outfile1.open("LF.dat");
+    outfile1.open(name1);
     float t[puntos];
     float x[puntos];
     float y[puntos];
@@ -133,10 +133,10 @@ float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, 
 }
 
 //Método de Runge Kutta para resolver la ecuación
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi)
+float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name2)
 {
     ofstream outfile2;
-    outfile2.open("RK.dat");
+    outfile2.open(name2);
     float t[puntos];
     float x[puntos];
     float y[puntos];
@@ -218,22 +218,20 @@ int main()
     float vy_i = 0.606;
     double d_xy = 0.01;
     double a = 0;
-    double b = 20.16;
+    double b = 20.1;
     
-    euler(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i);
-    leapfrog(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i);
-    rungekutta(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i);
-    /*
-    euler(a, b, d_xy, 300, x_in, y_in, vx_i, vy_i);
-    leapfrog(a, b, d_xy, 300, x_in, y_in, vx_i, vy_i);
-    rungekutta(a, b, d_xy, 300, x_in, y_in, vx_i, vy_i);
+    euler(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "euler1.dat");
+    leapfrog(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "LF1.dat");
+    rungekutta(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "RK1.dat");
     
-    euler(a, b, d_xy, 100, x_in, y_in, vx_i, vy_i);
-    leapfrog(a, b, d_xy, 100, x_in, y_in, vx_i, vy_i);
-    rungekutta(a, b, d_xy, 100, x_in, y_in, vx_i, vy_i);
-    */
+    euler(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "euler2.dat");
+    leapfrog(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "LF2.dat");
+    rungekutta(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "RK2.dat");
     
-    
+    euler(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "euler3.dat");
+    leapfrog(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "LF3.dat");
+    rungekutta(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "RK3.dat");
+   
     return 0;
 }
 
