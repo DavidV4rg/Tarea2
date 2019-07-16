@@ -23,6 +23,26 @@ y_RK1 = RK1[:,2]
 vx_RK1 = RK1[:,3]
 vy_RK1 = RK1[:,4]
 
+plt.figure()
+plt.subplot(1,3,1)
+plt.title("Euler dt1")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.plt(x_e1,y_e1)
+
+plt.subplot(1,3,2)
+plt.title("Leap Frog dt1")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.plt(x_LF1,y_LF1)
+
+plt.subplot(1,3,3)
+plt.title("Runge Kutta dt1")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.plt(x_RK1,y_RK1)
+
+
 euler2 = np.genfromtxt("euler2.dat", delimiter= "||")
 LF2 = np.genfromtxt("LF2.dat", delimiter = "||")
 RK2 = np.genfromtxt("RK2.dat", delimiter = "||")
@@ -66,57 +86,4 @@ x_RK3 = RK3[:,1]
 y_RK3 = RK3[:,2]
 vx_RK3 = RK3[:,3]
 vy_RK3 = RK3[:,4]
-
-#Calculo del momento angular, para ello se halla la velocidad angular y el momento de inercia (que es constante)
-#Inercia = Masa tierra en Masas solares(MT)*Radio tierra en Unidades astronómicas(RT)*2/5
-#Velocidad angular = velocidad tangencial/distancia; la distancia es una unidad astronómica
-#Momento angular(L) = Inercia*Momento angular
-
-MT = (3.0025)*10**-6
-RT = (4.258)*10**-5
-inercia = (2/5)*MT*(RT**2)
-
-wx_e1 = vx_e1/1 
-wy_e1 = vy_e1/1 
-wx_e2 = vx_e2/1
-wy_e2 = vy_e2/1
-wx_e3 = vx_e3/1
-wy_e3 = vy_e3/1
-
-Lx_e1 = inercia*wx_e1
-Ly_e1 = inercia*wy_e1
-Lx_e2 = inercia*wx_e2
-Ly_e2 = inercia*wy_e2
-Lx_e3 = inercia*wx_e3
-Ly_e3 = inercia*wy_e3
-
-wx_LF1 = vx_LF1/1
-wy_LF1 = vy_LF1/1
-wx_LF2 = vx_LF2/1
-wy_LF2 = vy_LF2/1
-wx_LF3 = vx_LF3/1
-wy_LF3 = vy_LF3/1
-
-Lx_LF1 = inercia*wx_LF1
-Ly_LF1 = inercia*wy_LF1
-Lx_LF2 = inercia*wx_LF2
-Ly_LF2 = inercia*wy_LF2
-Lx_LF3 = inercia*wx_LF3
-Ly_LF3 = inercia*wy_LF3
-
-wx_RK1 = vx_RK1/1
-wy_RK1 = vy_RK1/1
-wx_RK2 = vx_RK2/1
-wy_RK2 = vy_RK2/1
-wx_RK3 = vx_RK3/1
-wy_RK3 = vy_RK3/1
-
-Lx_RK1 = inercia*wx_RK1
-Ly_RK1 = inercia*wy_RK1
-Lx_RK2 = inercia*wx_RK2
-Ly_RK2 = inercia*wy_RK2
-Lx_RK3 = inercia*wx_RK3
-Ly_RK3 = inercia*wy_RK3
-
-
 
