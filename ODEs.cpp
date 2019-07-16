@@ -34,20 +34,20 @@ float dxdt_y(float t_i, float y_i, float v_y)
 
 float dvdt_x(float t_i, float x_i, float v_x)
 {
-    float G = pow(-66.7, -10); //constante gravitacional
-    float M = pow(19.89, 29); //masa solar 
-    float AU = 1;    //distancia de la tierra al sol
-    return G*M*0.1163/AU;
+    float G = 1.98256*pow(10,-29); //constante gravitacional
+    float M = 1.989*pow(10,30); //masa solar 
+    float r = pow(pow(x_i,2),0.5);
+    return G*M*x_i/pow(r,3);
 }
 
 //Derivada de la velocidad en la dimensión y
 
 float dvdt_y(float t_i, float y_i, float v_y)
 {
-    float G = pow(-66.7, -10); //constante gravitacional
-    float M = pow(19.89, 29); //Masa solar
-    float AU = 1; //distancia de la tierra al sol
-    return G*M*0.9772/AU;
+    float G = 1.98256*pow(10,-29); //constante gravitacional
+    float M = 1.989*pow(10,30); //Masa solar
+    float r = pow(pow(y_i,2),0.5);
+    return G*M*y_i/pow(r,3);
 }
 
 //Método de euler para resolver la ecuación diferencial
@@ -218,7 +218,7 @@ int main()
     float vy_i = 0.606;
     double d_xy = 0.01;
     double a = 0;
-    double b = 20.1;
+    double b = 20;
     
     euler(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "euler1.dat");
     leapfrog(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "LF1.dat");
