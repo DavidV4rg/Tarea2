@@ -6,61 +6,61 @@ using namespace std;
 
 //float años = pow(31.54,7);
 
-float dxdt_x(float t_i, float x_i, float v_x);
-float dvdt_x(float t_i, float x_i, float v_x);
+double dxdt_x(double t_i, double x_i, double v_x);
+dluble dvdt_x(double t_i, double x_i, double v_x);
 
-float dxdt_y(float t_i, float y_i, float v_y);
-float dvdt_y(float t_i, float y_i, float v_y);
+double dxdt_y(double t_i, double y_i, double v_y);
+double dvdt_y(double t_i, double y_i, double v_y);
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name);
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name1);
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name2);
+double euler(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name);
+double leapfrog(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name1);
+double rungekutta(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name2);
 
 //Derivada de la posición en la dimensión x
 
-float dxdt_x(float t_i, float x_i, float v_x)
+double dxdt_x(double t_i, double x_i, double v_x)
 {
     return v_x;
 }
 
 //Derivada de la posición en la dimensión y
 
-float dxdt_y(float t_i, float y_i, float v_y)
+double dxdt_y(double t_i, double y_i, double v_y)
 {
     return v_y;
 }
 
 //Derivada de la velocidad en la dimensión x
 
-float dvdt_x(float t_i, float x_i, float v_x)
+double dvdt_x(double t_i, double x_i, double v_x)
 {
-    float G = 1.98256*pow(10,-29); //constante gravitacional
-    float M = 1.989*pow(10,30); //masa solar 
-    float r = pow(pow(x_i,2),0.5);
+    double G = 1.98256*pow(10,-29); //constante gravitacional
+    double M = 1.989*pow(10,30); //masa solar 
+    double r = pow(pow(x_i,2),0.5);
     return -G*M*x_i/pow(r,3);
 }
 
 //Derivada de la velocidad en la dimensión y
 
-float dvdt_y(float t_i, float y_i, float v_y)
+double dvdt_y(double t_i, double y_i, double v_y)
 {
-    float G = 1.98256*pow(10,-29); //constante gravitacional
-    float M = 1.989*pow(10,30); //Masa solar
-    float r = pow(pow(y_i,2),0.5);
+    double G = 1.98256*pow(10,-29); //constante gravitacional
+    double M = 1.989*pow(10,30); //Masa solar
+    double r = pow(pow(y_i,2),0.5);
     return -G*M*y_i/pow(r,3);
 }
 
 //Método de euler para resolver la ecuación diferencial
 
-float euler(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name)
+double euler(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name)
 {
     ofstream outfile;
     outfile.open(name);
-    float t[puntos];
-    float x[puntos];
-    float y[puntos];
-    float vx[puntos];
-    float vy[puntos];
+    double t[puntos];
+    double x[puntos];
+    double y[puntos];
+    double vx[puntos];
+    double vy[puntos];
     
     //Condiciones iniciales
     t[0]=0.0;
@@ -92,15 +92,15 @@ float euler(double a, double b, double dxy , int puntos, float xi, float yi, flo
 }
 /*
 //Método de LeapFrog para resolver la ecuación diferencial
-float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name1)
+double leapfrog(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name1)
 {
     ofstream outfile1;
     outfile1.open(name1);
-    float t[puntos];
-    float x[puntos];
-    float y[puntos];
-    float vx[puntos];
-    float vy[puntos];
+    double t[puntos];
+    double x[puntos];
+    double y[puntos];
+    double vx[puntos];
+    double vy[puntos];
     
     //Condiciones iniciales
     t[0]=0.0;
@@ -133,15 +133,15 @@ float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, 
 }
 
 //Método de Runge Kutta para resolver la ecuación
-float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name2)
+double rungekutta(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name2)
 {
     ofstream outfile2;
     outfile2.open(name2);
-    float t[puntos];
-    float x[puntos];
-    float y[puntos];
-    float vx[puntos];
-    float vy[puntos];
+    double t[puntos];
+    double x[puntos];
+    double y[puntos];
+    double vx[puntos];
+    double vy[puntos];
     
     //Condiciones iniciales
     t[0]=0.0;
@@ -150,11 +150,11 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
     vx[0]=vxi;
     vy[0]=vyi;
         
-    float k1x,k2x,k3x,k4x;
-    float k1y,k2y,k3y,k4y;
-    float k1v_x, k2v_x, k3v_x, k4v_x;
-    float k1v_y, k2v_y, k3v_y, k4v_y;
-    float meanx, meany, meanv_x, meanv_y;
+    double k1x,k2x,k3x,k4x;
+    double k1y,k2y,k3y,k4y;
+    double k1v_x, k2v_x, k3v_x, k4v_x;
+    double k1v_y, k2v_y, k3v_y, k4v_y;
+    double meanx, meany, meanv_x, meanv_y;
     
     //Arreglo del tiempo  
     double dt = (b-a)/puntos;
@@ -212,15 +212,15 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
 */
 int main()
 {
-    float x_in = 0.1163;
-    float y_in = 0.9772;
-    float vx_i = -6.35;
-    float vy_i = 0.606;
+    double x_in = 0.1163;
+    double y_in = 0.9772;
+    double vx_i = -6.35;
+    double vy_i = 0.606;
     double d_xy = 0.01;
     double a = 0;
     double b = 20;
     
-    euler(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "euler1.dat");
+    euler(a, b, d_xy, 1000, x_in, y_in, vx_i, vy_i, "euler1.dat");
    // leapfrog(a, b, d_xy, 2001, x_in, y_in, vx_i, vy_i, "LF1.dat");
     //rungekutta(a, b, d_xy, 2001, x_in, y_in, vx_i, vy_i, "RK1.dat");
     
