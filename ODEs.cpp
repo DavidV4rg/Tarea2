@@ -195,7 +195,7 @@ int main()
 {
     //Primer dt
     euler(0, 20, 0.001, 10050, "Euler1.dat");
-    leapfrog(0, 20, 0.001, 10050, "LF1.dat");
+    leapfrog(0, 20, 0.01, 10050, "LF1.dat");
     rungekutta(0, 20, 0.001, 10050, "RK1.dat");
     
     //Segundo dt
@@ -205,7 +205,7 @@ int main()
     
     //Tercer dt
     euler(0, 20, 0.001, 20000, "Euler3.dat");
-    leapfrog(0, 20, 0.001, 20000, "LF3.dat");
+    leapfrog(0, 20, 0.0001, 20000, "LF3.dat");
     rungekutta(0, 20, 0.001, 20000, "RK3.dat");
     return 0;
 }
