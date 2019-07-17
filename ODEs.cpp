@@ -7,10 +7,10 @@ using namespace std;
 //float años = pow(31.54,7);
 
 double dxdt_x(double t_i, double x_i, double v_x);
-double dvdt_x(double t_i, double x_i, double v_x);
+double dvdt_x(double t_i, double x_i, double r_12);
 
 double dxdt_y(double t_i, double y_i, double v_y);
-double dvdt_y(double t_i, double y_i, double v_y);
+double dvdt_y(double t_i, double y_i, double r_12);
 
 double euler(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name);
 double leapfrog(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name1);
@@ -32,21 +32,21 @@ double dxdt_y(double t_i, double y_i, double v_y)
 
 //Derivada de la velocidad en la dimensión x
 
-double dvdt_x(double t_i, double x_i, double v_x)
+double dvdt_x(double t_i, double x_i, double r_12)
 {
     double G = 1.98256*pow(10,-29); //constante gravitacional
     double M = 1.989*pow(10,30); //masa solar 
-    double r = pow(pow(x_i,2),0.5);
+    double r = sqrt(pow(r_12,2));
     return -G*M*x_i/pow(r,3);
 }
 
 //Derivada de la velocidad en la dimensión y
 
-double dvdt_y(double t_i, double y_i, double v_y)
+double dvdt_y(double t_i, double y_i, double r_12)
 {
     double G = 1.98256*pow(10,-29); //constante gravitacional
     double M = 1.989*pow(10,30); //Masa solar
-    double r = pow(pow(y_i,2),0.5);
+    double r = sqrt(pow(r_12,2));
     return -G*M*y_i/pow(r,3);
 }
 
@@ -61,6 +61,7 @@ double euler(double a, double b, double dxy , int puntos, double xi, double yi, 
     double y[puntos];
     double vx[puntos];
     double vy[puntos];
+    double r[puntos];
     
     //Condiciones iniciales
     t[0]=0.0;
@@ -68,6 +69,7 @@ double euler(double a, double b, double dxy , int puntos, double xi, double yi, 
     y[0]= yi;
     vx[0]=vxi;
     vy[0]=vyi;
+    r[0] = sqrt(pow(xi,2)+pow(yi,2));
        
     //Arreglo del tiempo 
     double dt = (b-a)/puntos;
@@ -80,8 +82,9 @@ double euler(double a, double b, double dxy , int puntos, double xi, double yi, 
     {
         x[i] = x[i-1] + (dxy*dxdt_x(t[i-1],x[i-1],vx[i-1]));
         y[i] = y[i-1] + (dxy*dxdt_y(t[i-1],y[i-1],vy[i-1]));
-        vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1],x[i-1],vx[i-1]));
-        vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],vy[i-1]));  
+        r[i] = sqrt(pow(x[i],2)+pow(y[i],2));
+        vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1],x[i-1],r[i-1]));
+        vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],r[i-1]));  
     } 
     for(int i=1; i<puntos; i++)
     {
