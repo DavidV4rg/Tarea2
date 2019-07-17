@@ -13,8 +13,8 @@ double dvdt_x(double ti, double xi, double r12);
 double dvdt_y(double ti, double yi, double r12);
 
 double euler(double t0, double tf, double dxy, int puntos, string name);
-double leapfrog(double t0, double tf, double dxy, int puntos, string name);
-double rungekutta(double t0, double tf, double dxy, int puntos, string name);
+double leapfrog(double t0, double tf, double dxy, int puntos, string name1);
+double rungekutta(double t0, double tf, double dxy, int puntos, string name2);
 
 //Derivada de la posición en la dimensión x
 
@@ -37,8 +37,8 @@ double dvdt_x(double ti, double xi, double r12)
 {
     double G = -1.98256*pow(10,-29);
     double M = 1.989*pow(10,30);
-    double r = sqrt(pow(r12,2));
-    return G*M*xi/(pow(r,3));
+    //double r = sqrt(pow(r12,2));
+    return G*M*xi/(pow(r12,3));
 }
 
 //Derivada de la velocidad en la dimensión y
@@ -47,8 +47,8 @@ double dvdt_y(double ti, double yi, double r12)
 {
     double G = -1.98256*pow(10,-29);
     double M = 1.989*pow(10,30);
-    double r = sqrt(pow(r12,2));
-    return G*M*yi/(pow(r,3));
+    //double r = sqrt(pow(r12,2));
+    return G*M*yi/(pow(r12,3));
 }
 
 //Método de euler para resolver la ecuación diferencial
@@ -86,27 +86,20 @@ double euler(double t0, double tf, double dxy, int puntos, string name)
     outfile.close();
 }
 
-/*
+
 //Método de LeapFrog para resolver la ecuación diferencial
-double leapfrog(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name1)
+double leapfrog(double t0, double tf, double dxy, int puntos, string name1)
 {
     ofstream outfile1;
     outfile1.open(name1);
-    double t[puntos];
-    double x[puntos];
-    double y[puntos];
-    double vx[puntos];
-    double vy[puntos];
-    
-    //Condiciones iniciales
-    t[0]=0.0;
-    x[0]= xi;
-    y[0]= yi;
-    vx[0]=vxi;
-    vy[0]=vyi;
-        
-    //Arreglo del tiempo
-    double dt = (b-a)/puntos;
+    double dt = (tf-t0)/puntos;
+    double t[puntos], x[puntos], y[puntos], vx[puntos], vy[puntos], r12[puntos];
+    t[0] = 0;
+    x[0] = 0.1163;
+    y[0] = 0.9772;
+    vx[0] = -6.35;
+    vy[0] = 0.606;
+    r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -116,12 +109,13 @@ double leapfrog(double a, double b, double dxy , int puntos, double xi, double y
     {
         x[i] = x[i-1] + (0.5*dxy*dxdt_x(t[i-1],x[i-1],vx[i-1]));
         y[i] = y[i-1] + (0.5*dxy*dxdt_y(t[i-1],y[i-1],vy[i-1]));
-        vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1],x[i-1],vx[i-1]));
-        vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],vy[i-1]));        
+        r12[i] = sqrt(pow(x[i],2)+pow(y[i],2));
+        vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1],x[i-1],r12[i-1]));
+        vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],r12[i-1]));        
     }    
     for (int i =1; i<puntos; i++)
     {
-        //outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
+        outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
         
     }
     outfile1.close();
@@ -129,15 +123,18 @@ double leapfrog(double a, double b, double dxy , int puntos, double xi, double y
 }
 
 //Método de Runge Kutta para resolver la ecuación
-double rungekutta(double a, double b, double dxy , int puntos, double xi, double yi, double vxi, double vyi, string name2)
+
+double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
 {
     ofstream outfile2;
     outfile2.open(name2);
-    double t[puntos];
-    double x[puntos];
-    double y[puntos];
-    double vx[puntos];
-    double vy[puntos];
+    double t[puntos], x[puntos], y[puntos], vx[puntos], vy[puntos], r12[puntos];
+    t[0] = 0;
+    x[0] = 0.1163;
+    y[0] = 0.9772;
+    vx[0] = -6.35;
+    vy[0] = 0.606;
+    r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
     
     //Condiciones iniciales
     t[0]=0.0;
@@ -205,14 +202,16 @@ double rungekutta(double a, double b, double dxy , int puntos, double xi, double
     
     outfile2.close();
 }
-*/
+
 int main()
 {
     
     euler(0, 20, 0.001, 1050, "Euler1.dat");
+    leapfrog(0, 20, 0.001, 1050, "LF1.dat");
     euler(0, 20, 0.001, 1000, "Euler2.dat");
+    leapfrog(0, 20, 0.001, 1000, "LF2.dat");
     euler(0, 20, 0.001, 2000, "Euler3.dat");
-
+    leapfrog(0, 20, 0.001, 2000, "LF3.dat");
     return 0;
 }
 
