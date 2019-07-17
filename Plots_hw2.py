@@ -10,18 +10,21 @@ x_e1 = euler1[:,1]
 y_e1 = euler1[:,2]
 vx_e1 = euler1[:,3]
 vy_e1 = euler1[:,4]
+ma_e1 = euler1[:,5]
 
 tiempo_LF1 = LF1[:,0]
 x_LF1 = LF1[:,1]
 y_LF1 = LF1[:,2]
 vx_LF1 = LF1[:,3]
 vy_LF1 = LF1[:,4]
+ma_LF1 = LF1[:,5]
 
 tiempo_RK1 = RK1[:,0]
 x_RK1 = RK1[:,1]
 y_RK1 = RK1[:,2]
 vx_RK1 = RK1[:,3]
 vy_RK1 = RK1[:,4]
+ma_RK1 = RK1[:,5]
 
 plt.figure(figsize=(18,14))
 plt.subplot(3,4,1)
@@ -31,19 +34,19 @@ plt.title("$Posición$ $(Euler)$")
 plt.plot(x_e1, y_e1, color= "navy")
 
 plt.subplot(3,4,2)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Euler)$")
 plt.plot(vx_e1, vy_e1, color= "plum")
 
 plt.subplot(3,4,3)
-plt.xlabel("$Vx$")
-plt.ylabel("$Vy$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Euler)$")
-plt.plot(tiempo_e1, x_e1, color= "lightcoral")
+plt.plot(tiempo_e1, ma_e1, color= "lightcoral")
 
 plt.subplot(3,4,4)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Euler)$")
 plt.plot(tiempo_e1, x_e1, color= "darkseagreen")
@@ -55,19 +58,19 @@ plt.title("$Posición$ $(Leap Frog)$")
 plt.plot(x_LF1, y_LF1, color= "navy")
 
 plt.subplot(3,4,6)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Leap Frog)$")
 plt.plot(vx_LF1, vy_LF1, color= "plum")
 
 plt.subplot(3,4,7)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Leap Frog)$")
-plt.plot(tiempo_LF1, y_LF1, color= "lightcoral")
+plt.plot(tiempo_LF1, ma_LF1, color= "lightcoral")
 
 plt.subplot(3,4,8)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Leap Frog)$")
 plt.plot(tiempo_LF1, y_LF1, color= "darkseagreen")
@@ -79,19 +82,19 @@ plt.title("$Posición$ $(Runge Kutta)$")
 plt.plot(x_RK1, y_RK1, color= "navy")
 
 plt.subplot(3,4,10)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Runge Kutta$")
 plt.plot(vx_RK1, vy_RK1, color= "plum")
 
 plt.subplot(3,4,11)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Runge Kutta)$")
-plt.plot(tiempo_RK1, y_RK1, color= "lightcoral")
+plt.plot(tiempo_RK1, ma_RK1, color= "lightcoral")
 
 plt.subplot(3,4,12)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK1, y_RK1, color= "darkseagreen")
@@ -108,18 +111,21 @@ x_e2 = euler2[:,1]
 y_e2 = euler2[:,2]
 vx_e2 = euler2[:,3]
 vy_e2 = euler2[:,4]
+ma_e2 = euler2[:,5]
 
 tiempo_LF2 = LF2[:,0]
 x_LF2 = LF2[:,1]
 y_LF2 = LF2[:,2]
 vx_LF2 = LF2[:,3]
 vy_LF2 = LF2[:,4]
+ma_LF2 = LF2[:,5]
 
 tiempo_RK2 = RK2[:,0]
 x_RK2 = RK2[:,1]
 y_RK2 = RK2[:,2]
 vx_RK2 = RK2[:,3]
 vy_RK2 = RK2[:,4]
+ma_RK2 = RK2[:,5]
 
 plt.figure(figsize=(18,14))
 plt.subplot(3,4,1)
@@ -129,22 +135,22 @@ plt.title("$Posición$ $(Euler)$")
 plt.plot(x_e2, y_e2, color= "navy")
 
 plt.subplot(3,4,2)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Euler)$")
 plt.plot(vx_e2, vy_e2, color= "plum")
 
 plt.subplot(3,4,3)
-plt.xlabel("$Vx$")
-plt.ylabel("$Vy$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Euler)$")
 plt.plot(tiempo_e2, x_e2, color= "lightcoral")
 
 plt.subplot(3,4,4)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Euler)$")
-plt.plot(tiempo_e2, x_e2, color= "darkseagreen")
+plt.plot(tiempo_e2, ma_e2, color= "darkseagreen")
 
 plt.subplot(3,4,5)
 plt.xlabel("$x$")
@@ -153,19 +159,19 @@ plt.title("$Posición$ $(Leap Frog)$")
 plt.plot(x_LF2, y_LF2, color= "navy")
 
 plt.subplot(3,4,6)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Leap Frog)$")
 plt.plot(vx_LF2, vy_LF2, color= "plum")
 
 plt.subplot(3,4,7)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Leap Frog)$")
-plt.plot(tiempo_LF2, y_LF2, color= "lightcoral")
+plt.plot(tiempo_LF2, ma_LF2, color= "lightcoral")
 
 plt.subplot(3,4,8)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Leap Frog)$")
 plt.plot(tiempo_LF2, y_LF2, color= "darkseagreen")
@@ -177,19 +183,19 @@ plt.title("$Posición$ $(Runge Kutta)$")
 plt.plot(x_RK2, y_RK2, color= "navy")
 
 plt.subplot(3,4,10)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Runge Kutta$")
 plt.plot(vx_RK2, vy_RK2, color= "plum")
 
 plt.subplot(3,4,11)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Runge Kutta)$")
-plt.plot(tiempo_RK2, y_RK2, color= "lightcoral")
+plt.plot(tiempo_RK2, ma_RK2, color= "lightcoral")
 
 plt.subplot(3,4,12)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK2, y_RK2, color= "darkseagreen")
@@ -204,18 +210,21 @@ x_e3 = euler3[:,1]
 y_e3 = euler3[:,2]
 vx_e3 = euler3[:,3]
 vy_e3 = euler3[:,4]
+ma_e3 = euler3[:,5]
 
 tiempo_LF3 = LF3[:,0]
 x_LF3 = LF3[:,1]
 y_LF3 = LF3[:,2]
 vx_LF3 = LF3[:,3]
 vy_LF3 = LF3[:,4]
+ma_LF3 = LF3[:,5]
 
 tiempo_RK3 = RK3[:,0]
 x_RK3 = RK3[:,1]
 y_RK3 = RK3[:,2]
 vx_RK3 = RK3[:,3]
 vy_RK3 = RK3[:,4]
+ma_RK3 = RK3[:,5]
 
 plt.figure(figsize=(18,14))
 plt.subplot(3,4,1)
@@ -225,19 +234,19 @@ plt.title("$Posición$ $(Euler)$")
 plt.plot(x_e3, y_e3, color= "navy")
 
 plt.subplot(3,4,2)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Euler)$")
 plt.plot(vx_e3, vy_e3, color= "plum")
 
 plt.subplot(3,4,3)
-plt.xlabel("$Vx$")
-plt.ylabel("$Vy$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$$Momento$ $angular$")
 plt.title("$Momento$ $(Euler)$")
-plt.plot(tiempo_e3, x_e3, color= "lightcoral")
+plt.plot(tiempo_e3, ma_e3, color= "lightcoral")
 
 plt.subplot(3,4,4)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Euler)$")
 plt.plot(tiempo_e3, x_e3, color= "darkseagreen")
@@ -249,19 +258,19 @@ plt.title("$Posición$ $(Leap Frog)$")
 plt.plot(x_LF3, y_LF3, color= "navy")
 
 plt.subplot(3,4,6)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
 plt.title("$Velocidad$ $(Leap Frog)$")
 plt.plot(vx_LF3, vy_LF3, color= "plum")
 
 plt.subplot(3,4,7)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Leap Frog)$")
-plt.plot(tiempo_LF3, y_LF3, color= "lightcoral")
+plt.plot(tiempo_LF3, ma_LF3, color= "lightcoral")
 
 plt.subplot(3,4,8)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Leap Frog)$")
 plt.plot(tiempo_LF3, y_LF3, color= "darkseagreen")
@@ -279,13 +288,13 @@ plt.title("$Velocidad$ $(Runge Kutta$")
 plt.plot(vx_RK3, vy_RK3, color= "plum")
 
 plt.subplot(3,4,11)
-plt.xlabel("$x$")
-plt.ylabel("$y$")
+plt.xlabel("$Tiempo$ $(yr)$")
+plt.ylabel("$Momento$ $angular$")
 plt.title("$Momento$ $(Runge Kutta)$")
-plt.plot(tiempo_RK3, y_RK3, color= "lightcoral")
+plt.plot(tiempo_RK3, ma_RK3, color= "lightcoral")
 
 plt.subplot(3,4,12)
-plt.xlabel("$Vx$")
+plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Vy$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK3, y_RK3, color= "darkseagreen")
