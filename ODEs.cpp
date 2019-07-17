@@ -37,7 +37,7 @@ float dvdt_x(float t_i, float x_i, float v_x)
     float G = 1.98256*pow(10,-29); //constante gravitacional
     float M = 1.989*pow(10,30); //masa solar 
     float r = pow(pow(x_i,2),0.5);
-    return G*M*x_i/pow(r,3);
+    return -G*M*x_i/pow(r,3);
 }
 
 //Derivada de la velocidad en la dimensión y
@@ -47,7 +47,7 @@ float dvdt_y(float t_i, float y_i, float v_y)
     float G = 1.98256*pow(10,-29); //constante gravitacional
     float M = 1.989*pow(10,30); //Masa solar
     float r = pow(pow(y_i,2),0.5);
-    return G*M*y_i/pow(r,3);
+    return -G*M*y_i/pow(r,3);
 }
 
 //Método de euler para resolver la ecuación diferencial
@@ -90,7 +90,7 @@ float euler(double a, double b, double dxy , int puntos, float xi, float yi, flo
     }
     outfile.close();
 }
-
+/*
 //Método de LeapFrog para resolver la ecuación diferencial
 float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, float vxi, float vyi, string name1)
 {
@@ -125,7 +125,7 @@ float leapfrog(double a, double b, double dxy , int puntos, float xi, float yi, 
     }    
     for (int i =1; i<puntos; i++)
     {
-        outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
+        //outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
         
     }
     outfile1.close();
@@ -203,13 +203,13 @@ float rungekutta(double a, double b, double dxy , int puntos, float xi, float yi
     }
     for(int i =1; i<puntos; i++)
     {
-        outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
+        //outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
         
     }
     
     outfile2.close();
 }
-
+*/
 int main()
 {
     float x_in = 0.1163;
@@ -221,16 +221,16 @@ int main()
     double b = 20;
     
     euler(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "euler1.dat");
-    leapfrog(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "LF1.dat");
-    rungekutta(a, b, d_xy, 201, x_in, y_in, vx_i, vy_i, "RK1.dat");
+   // leapfrog(a, b, d_xy, 2001, x_in, y_in, vx_i, vy_i, "LF1.dat");
+    //rungekutta(a, b, d_xy, 2001, x_in, y_in, vx_i, vy_i, "RK1.dat");
     
-    euler(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "euler2.dat");
-    leapfrog(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "LF2.dat");
-    rungekutta(a, b, d_xy, 301, x_in, y_in, vx_i, vy_i, "RK2.dat");
+   // euler(a, b, d_xy, 3001, x_in, y_in, vx_i, vy_i, "euler2.dat");
+  //  leapfrog(a, b, d_xy, 3001, x_in, y_in, vx_i, vy_i, "LF2.dat");
+   // rungekutta(a, b, d_xy, 3001, x_in, y_in, vx_i, vy_i, "RK2.dat");
     
-    euler(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "euler3.dat");
-    leapfrog(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "LF3.dat");
-    rungekutta(a, b, d_xy, 101, x_in, y_in, vx_i, vy_i, "RK3.dat");
+   // euler(a, b, d_xy, 1001, x_in, y_in, vx_i, vy_i, "euler3.dat");
+    //leapfrog(a, b, d_xy, 1001, x_in, y_in, vx_i, vy_i, "LF3.dat");
+    //rungekutta(a, b, d_xy, 1001, x_in, y_in, vx_i, vy_i, "RK3.dat");
    
     return 0;
 }
