@@ -7,7 +7,7 @@ using namespace std;
 //float años = pow(31.54,7);
 
 double dxdt_x(double t_i, double x_i, double v_x);
-dluble dvdt_x(double t_i, double x_i, double v_x);
+double dvdt_x(double t_i, double x_i, double v_x);
 
 double dxdt_y(double t_i, double y_i, double v_y);
 double dvdt_y(double t_i, double y_i, double v_y);
