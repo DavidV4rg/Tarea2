@@ -28,19 +28,19 @@ plt.subplot(1,3,1)
 plt.title("Euler dt1")
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plt(x_e1,y_e1)
+plt.plot(x_e1,y_e1)
 
 plt.subplot(1,3,2)
 plt.title("Leap Frog dt1")
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plt(x_LF1,y_LF1)
+plt.plot(x_LF1,y_LF1)
 
 plt.subplot(1,3,3)
 plt.title("Runge Kutta dt1")
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plt(x_RK1,y_RK1)
+plt.plot(x_RK1,y_RK1)
 
 
 euler2 = np.genfromtxt("euler2.dat", delimiter= "||")
