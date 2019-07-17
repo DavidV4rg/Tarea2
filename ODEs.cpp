@@ -129,28 +129,21 @@ double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
     ofstream outfile2;
     outfile2.open(name2);
     double t[puntos], x[puntos], y[puntos], vx[puntos], vy[puntos], r12[puntos];
+    //Condiciones iniciales
     t[0] = 0;
     x[0] = 0.1163;
     y[0] = 0.9772;
     vx[0] = -6.35;
     vy[0] = 0.606;
     r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
-    
-    //Condiciones iniciales
-    t[0]=0.0;
-    x[0]= xi;
-    y[0]= yi;
-    vx[0]=vxi;
-    vy[0]=vyi;
-        
+           
     double k1x,k2x,k3x,k4x;
     double k1y,k2y,k3y,k4y;
     double k1v_x, k2v_x, k3v_x, k4v_x;
     double k1v_y, k2v_y, k3v_y, k4v_y;
     double meanx, meany, meanv_x, meanv_y;
-    
-    //Arreglo del tiempo  
-    double dt = (b-a)/puntos;
+ 
+    double dt = (tf-t0)/puntos;
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -158,46 +151,41 @@ double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
     
     for (int i =1; i<puntos; i++)
     {
-        //Calculo en x
+
         k1x = dxy*dxdt_x(t[i-1],x[i-1],vx[i-1]);
-        k1v_x = dxy*dvdt_x(t[i-1], x[i-1], vx[i-1]);
+        k1y = dxy*dxdt_y(t[i-1],y[i-1],vy[i-1]);
+        k1v_x = dxy*dvdt_x(t[i-1], x[i-1], r12[i-1]);
+        k1v_y = dxy*dvdt_y(t[i-1], y[i-1], r12[i-1]);
         
-        k2x = dxy*dxdt_x(t[i-1]+dxy/2, x[i-1]+k1x/2, vx[i-1]+k1v_x/2);
-        k2v_x = dxy*dvdt_x(t[i-1]+dxy/2, x[i-1]+k1x/2, vx[i-1]+k1v_x/2);
+        k2x = dxy*dxdt_x(t[i-1]+(dxy*0.5), x[i-1]+(k1x*0.5), vx[i-1]+(k1v_x*0.5));
+        k2y = dxy*dxdt_y(t[i-1]+(dxy*0.5), y[i-1]+(k1y*0.5), vy[i-1]+(k1v_y*0.5));
+        k2v_x = dxy*dvdt_x(t[i-1]+(dxy*0.5), x[i-1]+(k1x*0.5), r12[i-1]+(k1v_x*0.5));
+        k2v_y = dxy*dvdt_y(t[i-1]+(dxy*0.5), y[i-1]+(k1y*0.5), r12[i-1]+(k1v_y*0.5));
         
-        k3x = dxy*dxdt_x(t[i-1]+dxy/2, x[i-1]+k2x/2, vx[i-1]+k2v_x/2);
-        k3v_x = dxy*dvdt_x(t[i-1]+dxy/2, x[i-1]+k2x/2, vx[i-1]+k2v_x/2);
+        k3x = dxy*dxdt_x(t[i-1]+(dxy*0.5), x[i-1]+(k2x*0.5), vx[i-1]+(k2v_x*0.5));
+        k3y = dxy*dxdt_y(t[i-1]+(dxy*0.5), y[i-1]+(k2y*0.5), vy[i-1]+(k2v_y*0.5));
+        k3v_x = dxy*dvdt_x(t[i-1]+(dxy*0.5), x[i-1]+(k2x*0.5), r12[i-1]+(k2v_x*0.5));
+        k3v_y = dxy*dvdt_y(t[i-1]+(dxy*0.5), y[i-1]+(k2y*0.5), r12[i-1]+(k2v_y*0.5));
         
         k4x = dxy*dxdt_x(t[i-1]+dxy, x[i-1]+k3x, vx[i-1]+k3v_x);
-        k4v_x = dxy*dvdt_x(t[i-1]+dxy, x[i-1]+k3x, vx[i-1]+k3v_x);
-        
-        //calculo en y
-        k1y = dxy*dxdt_y(t[i-1],y[i-1],vy[i-1]);
-        k1v_y = dxy*dvdt_y(t[i-1], y[i-1], vy[i-1]);
-        
-        k2y = dxy*dxdt_y(t[i-1]+dxy/2, y[i-1]+k1y/2, vy[i-1]+k1v_y/2);
-        k2v_y = dxy*dvdt_y(t[i-1]+dxy/2, y[i-1]+k1y/2, vy[i-1]+k1v_y/2);
-        
-        k3y = dxy*dxdt_y(t[i-1]+dxy/2, y[i-1]+k2y/2, vy[i-1]+k2v_y/2);
-        k3v_y = dxy*dvdt_y(t[i-1]+dxy/2, y[i-1]+k2y/2, vy[i-1]+k2v_y/2);
-        
         k4y = dxy*dxdt_y(t[i-1]+dxy, y[i-1]+k3y, vy[i-1]+k3v_y);
-        k4v_y = dxy*dvdt_y(t[i-1]+dxy, y[i-1]+k3y, vy[i-1]+k3v_y);   
-        
-        meanx = (1/6)*(k1x+2*k2x+2*k3x+k4x);
-        meany = (1/6)*(k1y+2*k2y+2*k3y+k4y);
-        meanv_x = (1/6)*(k1v_x+2*k2v_x+2*k3v_x+k4v_x);
-        meanv_y = (1/6)*(k1v_y+2*k2v_y+2*k3v_y+k4v_y);
+        k4v_x = dxy*dvdt_x(t[i-1]+dxy, x[i-1]+k3x, r12[i-1]+k3v_x);
+        k4v_y = dxy*dvdt_y(t[i-1]+dxy, y[i-1]+k3y, r12[i-1]+k3v_y);   
+      
+        meanx = (1/6)*(k1x+(2*k2x)+(2*k3x)+k4x);
+        meany = (1/6)*(k1y+(2*k2y)+(2*k3y)+k4y);
+        meanv_x = (1/6)*(k1v_x+(2*k2v_x)+(2*k3v_x)+k4v_x);
+        meanv_y = (1/6)*(k1v_y+(2*k2v_y)+(2*k3v_y)+k4v_y);
         
         x[i] = x[i-1]+meanx;
         y[i] = y[i-1]+meany;
+        r12[i] = sqrt(pow(x[i],2)+pow(y[i],2));
         vx[i] = vx[i-1]+meanv_x;
         vy[i] = vy[i-1]+meanv_y;
     }
     for(int i =1; i<puntos; i++)
     {
-        //outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;
-        
+        outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << endl;        
     }
     
     outfile2.close();
@@ -205,13 +193,20 @@ double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
 
 int main()
 {
+    //Primer dt
+    euler(0, 20, 0.001, 10050, "Euler1.dat");
+    leapfrog(0, 20, 0.001, 10050, "LF1.dat");
+    rungekutta(0, 20, 0.001, 10050, "RK1.dat");
     
-    euler(0, 20, 0.001, 1050, "Euler1.dat");
-    leapfrog(0, 20, 0.001, 1050, "LF1.dat");
-    euler(0, 20, 0.001, 1000, "Euler2.dat");
-    leapfrog(0, 20, 0.001, 1000, "LF2.dat");
-    euler(0, 20, 0.001, 2000, "Euler3.dat");
-    leapfrog(0, 20, 0.001, 2000, "LF3.dat");
+    //Segundo dt
+    euler(0, 20, 0.001, 10000, "Euler2.dat");
+    leapfrog(0, 20, 0.001, 10000, "LF2.dat");
+    rungekutta(0, 20, 0.001, 10000, "RK2.dat");
+    
+    //Tercer dt
+    euler(0, 20, 0.001, 20000, "Euler3.dat");
+    leapfrog(0, 20, 0.001, 20000, "LF3.dat");
+    rungekutta(0, 20, 0.001, 20000, "RK3.dat");
     return 0;
 }
 
