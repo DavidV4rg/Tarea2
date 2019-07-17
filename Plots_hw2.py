@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt
 
-euler1 = np.genfromtxt("euler1.dat", delimiter= "||")
+euler1 = np.genfromtxt("Euler1.dat", delimiter= "||")
 LF1 = np.genfromtxt("LF1.dat", delimiter = "||")
 RK1 = np.genfromtxt("RK1.dat", delimiter = "||")
 
@@ -23,31 +23,87 @@ y_RK1 = RK1[:,2]
 vx_RK1 = RK1[:,3]
 vy_RK1 = RK1[:,4]
 
-plt.figure()
-plt.subplot(1,3,1)
-plt.title("Euler dt1")
+plt.figure(figsize=(18,14))
+plt.subplot(3,4,1)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plot(x_e1,y_e1)
+plt.title("$Posición$ $(Euler)$")
+plt.plot(x_e1, y_e1, color= "navy")
 
-plt.subplot(1,3,2)
-plt.title("Leap Frog dt1")
+plt.subplot(3,4,2)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plot(x_LF1,y_LF1)
+plt.title("$Velocidad$ $(Euler)$")
+plt.plot(vx_e1, vy_e1, color= "plum")
 
-plt.subplot(1,3,3)
-plt.title("Runge Kutta dt1")
+plt.subplot(3,4,3)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Momento$ $(Euler)$")
+plt.plot(tiempo_e1, x_e1, color= "lightcoral")
+
+plt.subplot(3,4,4)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Euler)$")
+plt.plot(tiempo_e1, x_e1, color= "darkseagreen")
+
+plt.subplot(3,4,5)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
-plt.plot(x_RK1,y_RK1)
+plt.title("$Posición$ $(Leap Frog)$")
+plt.plot(x_LF1, y_LF1, color= "navy")
 
+plt.subplot(3,4,6)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Leap Frog)$")
+plt.plot(vx_LF1, vy_LF1, color= "plum")
 
-euler2 = np.genfromtxt("euler2.dat", delimiter= "||")
+plt.subplot(3,4,7)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Leap Frog)$")
+plt.plot(tiempo_LF1, y_LF1, color= "lightcoral")
+
+plt.subplot(3,4,8)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Leap Frog)$")
+plt.plot(tiempo_LF1, y_LF1, color= "darkseagreen")
+
+plt.subplot(3,4,9)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Runge Kutta)$")
+plt.plot(x_RK1, y_RK1, color= "navy")
+
+plt.subplot(3,4,10)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Runge Kutta$")
+plt.plot(vx_RK1, vy_RK1, color= "plum")
+
+plt.subplot(3,4,11)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Runge Kutta)$")
+plt.plot(tiempo_RK1, y_RK1, color= "lightcoral")
+
+plt.subplot(3,4,12)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Runge Kutta)$")
+plt.plot(tiempo_RK1, y_RK1, color= "darkseagreen")
+
+plt.savefig("Primer dt")
+
+##Plots del segundo dt
+euler2 = np.genfromtxt("Euler2.dat", delimiter= "||")
 LF2 = np.genfromtxt("LF2.dat", delimiter = "||")
 RK2 = np.genfromtxt("RK2.dat", delimiter = "||")
 
-tiempo_e1 = euler2[:,0]
+tiempo_e2 = euler2[:,0]
 x_e2 = euler2[:,1]
 y_e2 = euler2[:,2]
 vx_e2 = euler2[:,3]
@@ -61,11 +117,85 @@ vy_LF2 = LF2[:,4]
 
 tiempo_RK2 = RK2[:,0]
 x_RK2 = RK2[:,1]
-y_RK2 = RK1[:,2]
+y_RK2 = RK2[:,2]
 vx_RK2 = RK2[:,3]
 vy_RK2 = RK2[:,4]
 
-euler3 = np.genfromtxt("euler3.dat", delimiter= "||")
+plt.figure(figsize=(18,14))
+plt.subplot(3,4,1)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Euler)$")
+plt.plot(x_e2, y_e2, color= "navy")
+
+plt.subplot(3,4,2)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Euler)$")
+plt.plot(vx_e2, vy_e2, color= "plum")
+
+plt.subplot(3,4,3)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Momento$ $(Euler)$")
+plt.plot(tiempo_e2, x_e2, color= "lightcoral")
+
+plt.subplot(3,4,4)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Euler)$")
+plt.plot(tiempo_e2, x_e2, color= "darkseagreen")
+
+plt.subplot(3,4,5)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Leap Frog)$")
+plt.plot(x_LF2, y_LF2, color= "navy")
+
+plt.subplot(3,4,6)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Leap Frog)$")
+plt.plot(vx_LF2, vy_LF2, color= "plum")
+
+plt.subplot(3,4,7)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Leap Frog)$")
+plt.plot(tiempo_LF2, y_LF2, color= "lightcoral")
+
+plt.subplot(3,4,8)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Leap Frog)$")
+plt.plot(tiempo_LF2, y_LF2, color= "darkseagreen")
+
+plt.subplot(3,4,9)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Runge Kutta)$")
+plt.plot(x_RK2, y_RK2, color= "navy")
+
+plt.subplot(3,4,10)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Runge Kutta$")
+plt.plot(vx_RK2, vy_RK2, color= "plum")
+
+plt.subplot(3,4,11)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Runge Kutta)$")
+plt.plot(tiempo_RK2, y_RK2, color= "lightcoral")
+
+plt.subplot(3,4,12)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Runge Kutta)$")
+plt.plot(tiempo_RK2, y_RK2, color= "darkseagreen")
+plt.savefig("Segundo dt")
+
+euler3 = np.genfromtxt("Euler3.dat", delimiter= "||")
 LF3 = np.genfromtxt("LF3.dat", delimiter = "||")
 RK3 = np.genfromtxt("RK3.dat", delimiter = "||")
 
@@ -86,4 +216,83 @@ x_RK3 = RK3[:,1]
 y_RK3 = RK3[:,2]
 vx_RK3 = RK3[:,3]
 vy_RK3 = RK3[:,4]
+
+plt.figure(figsize=(18,14))
+plt.subplot(3,4,1)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Euler)$")
+plt.plot(x_e3, y_e3, color= "navy")
+
+plt.subplot(3,4,2)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Euler)$")
+plt.plot(vx_e3, vy_e3, color= "plum")
+
+plt.subplot(3,4,3)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Momento$ $(Euler)$")
+plt.plot(tiempo_e3, x_e3, color= "lightcoral")
+
+plt.subplot(3,4,4)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Euler)$")
+plt.plot(tiempo_e3, x_e3, color= "darkseagreen")
+
+plt.subplot(3,4,5)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Leap Frog)$")
+plt.plot(x_LF3, y_LF3, color= "navy")
+
+plt.subplot(3,4,6)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Leap Frog)$")
+plt.plot(vx_LF3, vy_LF3, color= "plum")
+
+plt.subplot(3,4,7)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Leap Frog)$")
+plt.plot(tiempo_LF3, y_LF3, color= "lightcoral")
+
+plt.subplot(3,4,8)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Leap Frog)$")
+plt.plot(tiempo_LF3, y_LF3, color= "darkseagreen")
+
+plt.subplot(3,4,9)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Posición$ $(Runge Kutta)$")
+plt.plot(x_RK3, y_RK3, color= "navy")
+
+plt.subplot(3,4,10)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Velocidad$ $(Runge Kutta$")
+plt.plot(vx_RK3, vy_RK3, color= "plum")
+
+plt.subplot(3,4,11)
+plt.xlabel("$x$")
+plt.ylabel("$y$")
+plt.title("$Momento$ $(Runge Kutta)$")
+plt.plot(tiempo_RK3, y_RK3, color= "lightcoral")
+
+plt.subplot(3,4,12)
+plt.xlabel("$Vx$")
+plt.ylabel("$Vy$")
+plt.title("$Energía$ $(Runge Kutta)$")
+plt.plot(tiempo_RK3, y_RK3, color= "darkseagreen")
+
+plt.savefig("Tercer dt")
+
+
+
+
 
