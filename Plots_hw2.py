@@ -35,7 +35,8 @@ ep_RK1 = RK1[:,6]
 el_RK1 = RK1[:,7]
 ener_RK1 = ep_RK1+el_RK1
 
-plt.figure(figsize=(18,14))
+plt.figure(figsize=(26,18))
+plt.suptitle('Delta = 0.001', fontsize=30)
 plt.subplot(3,4,1)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
@@ -108,7 +109,7 @@ plt.ylabel("$Energía$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK1, ener_RK1, color= "darkseagreen")
 
-plt.savefig("Primer dt")
+plt.savefig("Primer_dt.pdf")
 
 ##Plots del segundo dt
 euler2 = np.genfromtxt("Euler2.dat", delimiter= "||")
@@ -123,7 +124,7 @@ vy_e2 = euler2[:,4]
 ma_e2 = euler2[:,5]
 ep_e2 = euler2[:,6]
 el_e2 = euler2[:,7]
-ener_e1 = ep_e2+el_e2
+ener_e2 = ep_e2+el_e2
 
 tiempo_LF2 = LF2[:,0]
 x_LF2 = LF2[:,1]
@@ -146,7 +147,8 @@ el_RK2 = RK2[:,7]
 ener_RK2 = ep_RK2+el_RK2
 
 
-plt.figure(figsize=(18,14))
+plt.figure(figsize=(26,18))
+plt.suptitle('$Delta = 0.0001$', fontsize=30)
 plt.subplot(3,4,1)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
@@ -218,7 +220,7 @@ plt.xlabel("$Tiempo$ $(yr)$")
 plt.ylabel("$Energía$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK2, ener_RK2, color= "darkseagreen")
-plt.savefig("Segundo dt")
+plt.savefig("Segundo_dt.pdf")
 
 euler3 = np.genfromtxt("Euler3.dat", delimiter= "||")
 LF3 = np.genfromtxt("LF3.dat", delimiter = "||")
@@ -255,7 +257,8 @@ el_RK3 = RK3[:,7]
 ener_RK3 = ep_RK3+el_RK3
 
 
-plt.figure(figsize=(18,14))
+plt.figure(figsize=(26,18))
+plt.suptitle('$Delta = 0.0002$', fontsize=30)
 plt.subplot(3,4,1)
 plt.xlabel("$x$")
 plt.ylabel("$y$")
@@ -328,7 +331,7 @@ plt.ylabel("$Energía$")
 plt.title("$Energía$ $(Runge Kutta)$")
 plt.plot(tiempo_RK3, ener_RK3, color= "darkseagreen")
 
-plt.savefig("Tercer dt")
+plt.savefig("Tercer_dt.pdf")
 
 
 
