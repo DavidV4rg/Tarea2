@@ -56,7 +56,7 @@ plt.subplot(1,2,2)
 plt.imshow(np.abs(trans2), norm = LogNorm())
 plt.colorbar()
 plt.title("filtro imagen 2")
-plt.savefig("fitros.pdf")
+plt.savefig("filtros.pdf")
 
 filt1 = ifft2(trans1)
 filt2 = ifft2(trans2)
