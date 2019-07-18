@@ -5,6 +5,8 @@
 using namespace std;
 
 double masaT = 5.972*pow(10,24);
+double Gr = -1.98256*pow(10,-29);
+double masaS = 1.989*pow(10,30);
 
 double dxdt_x(double ti, double xi, double vx);
 double dxdt_y(double ti, double yi, double vy);
@@ -65,6 +67,8 @@ double euler(double t0, double tf, double dxy, int puntos, string name)
     vx[0] = -6.35;
     vy[0] = 0.606;
     r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
+    energiaK[0] = 0.5*masaT*(vx[0]+vy[0]);
+    energiaP[0] = Gr*masaT*masaS/r12[0];
     
     for (int i = 1; i < puntos; i++)
     {
@@ -78,11 +82,13 @@ double euler(double t0, double tf, double dxy, int puntos, string name)
         vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1], x[i-1], r12[i-1]));
         vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1], y[i-1], r12[i-1]));
         ma[i] = (r12[i]*vx[i])-(r12[i]*vy[i]);
+        energiaK[i] = 0.5*masaT*(vx[i]+vy[i]);
+        energiaP[i] = Gr*masaT*masaS/r12[i];
     }
     
     for (int i = 1; i<puntos; i++)
     {
-        outfile << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] <<endl;
+        outfile << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] << "||" << energiaK[i-1] << "||" << energiaP[i-1]<<endl;
     }
     outfile.close();
 }
@@ -101,6 +107,8 @@ double leapfrog(double t0, double tf, double dxy, int puntos, string name1)
     vx[0] = -6.35;
     vy[0] = 0.606;
     r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
+    energiaK[0] = 0.5*masaT*(vx[0]+vy[0]);
+    energiaP[0] = Gr*masaT*masaS/r12[0];
     for(int i = 1; i<puntos; i++)
     {
         t[i] = t[i-1] + dt;
@@ -114,10 +122,12 @@ double leapfrog(double t0, double tf, double dxy, int puntos, string name1)
         vx[i] = vx[i-1] + (dxy*dvdt_x(t[i-1],x[i-1],r12[i-1]));
         vy[i] = vy[i-1] + (dxy*dvdt_y(t[i-1],y[i-1],r12[i-1]));   
         ma[i] = (r12[i]*vx[i])-(r12[i]*vy[i]);
+        energiaK[i] = 0.5*masaT*(vx[i]+vy[i]);
+        energiaP[i] = Gr*masaT*masaS/r12[i];
     }    
     for (int i =1; i<puntos; i++)
     {
-        outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] <<endl;
+        outfile1 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] << "||" << energiaK[i-1] << "||" << energiaP[i-1]<<endl;
         
     }
     outfile1.close();
@@ -138,6 +148,8 @@ double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
     vx[0] = -6.35;
     vy[0] = 0.606;
     r12[0] = sqrt(pow(x[0],2)+pow(y[0],2));
+    energiaK[0] = 0.5*masaT*(vx[0]+vy[0]);
+    energiaP[0] = Gr*masaT*masaS/r12[0];
            
     double k1x,k2x,k3x,k4x;
     double k1y,k2y,k3y,k4y;
@@ -185,10 +197,13 @@ double rungekutta(double t0, double tf, double dxy, int puntos, string name2)
         vx[i] = vx[i-1]+meanv_x;
         vy[i] = vy[i-1]+meanv_y;
         ma[i] = (r12[i]*vx[i])-(r12[i]*vy[i]);
+        energiaK[i] = 0.5*masaT*(vx[i]+vy[i]);
+        energiaP[i] = Gr*masaT*masaS/r12[i];
     }
     for(int i =1; i<puntos; i++)
     {
-        outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] <<endl;
+        outfile2 << t[i-1] << "||" << x[i-1] << "||" << y[i-1] << "||" << vx[i-1] << "||" << vy[i-1] << "||" << ma[i] << "||" << energiaK[i-1] << "||" << energiaP[i-1]<<endl;
+        
     }
     
     outfile2.close();
