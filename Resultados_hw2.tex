@@ -1,0 +1,79 @@
+\documentclass[11pt,letterpaper]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage[absolute]{textpos} % Para poner una imagen en posiciones arbitrarias
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{hyperref}
+%\decimalpoint
+
+\begin{document}
+\begin{center}
+{\Large Métodos Computacionales} \\
+\textsc{Tarea 2}\\
+{\large David Vargas Cediel}\\
+201618127\\
+19/07/19\\
+\end{center}
+
+\noindent
+\section{Primer punto: Transformada de Fourier}
+\begin{center}
+\includegraphics[width=18cm]{FFtIm.pdf}
+\\
+\textbf{Figura 1: }{Espectros de Fourier}
+\end{center}
+
+{En la figura 1 se pueden ver los espectros de la transformada de Fourier para cada una de las imagenes, se puede ver que la imagen feliz tiene un rango un poco más pequeño que a otra imagen ya que esta ultima tiene un orden de magnitud menor ($10^{-2}$)}
+
+
+\begin{center}
+\includegraphics[width=15cm]{ImProceso.pdf}
+\\
+\textbf{Figura 2: }{Proceso para filtrar las imagenes}
+\end{center}
+
+{En la figura 2 se ven 3 diferentes procesos que se llevaron a cabo para filtrar las imágenes. La primera fila corresponde a las frecuencias de la transformada para cada imágen. La sefunda fila muestra el filtro realizado, donde se eliminan las frecuencias bajas de la imagen 1 y las frecuencias bajas de la imagen 2. Por último, se muestran las imagenes con el filtro anterior ya aplicado.}
+
+\begin{center}
+\includegraphics[width=15cm]{ImHybrid.pdf} \\
+\textbf{Figura 3: }{Imágen híbrida}
+\end{center}
+{En esta ultima figura se puede ver la suma de las dos transformadas inversas de cada imagen filtrada para poder ver la imagen híbrida}
+
+
+\noindent
+\section{Segundo punto: EDO: Masa orbitando alrededor de otra}
+
+\begin{center}
+\includegraphics[width=19cm]{XY_met_dt.pdf}
+\\
+\textbf{Figura 4: }{Posición de la Tierra por cada método (columna) y delta(fila)}
+\end{center}
+{En la figura 4 se puede ver la orbita simulada para cada uno de los métodos. Según esto se puede decir que el método de Euler es más preciso para cada uno de los dt, el método de Runge Kutta de 4 orden presenta unas inconsistencias para el último dt. EL método de Leap Frog es muy impreciso para un dt grande pero para uno muy pequeño se desvía un poco.}
+
+\begin{center}
+\includegraphics[width=19cm]{VxVy_met_dt.pdf}
+\\
+\textbf{Figura 5: }{Velocidades de la Tierra por cada método (columna) y delta(fila)}
+\end{center}
+{En esta figura se puede ver que los tres métodos llegan a ser precisos. Euler es más consistente en los tres deltas distintos, mientras que Leap Frog y Runge Kutta de 4 orden presentan variacones para deltas grandes y pequeños respectivamente}
+
+\begin{center}
+    \includegraphics[width=17.5cm]{Mome_met_dt.pdf}
+    \\
+    \textbf{Figura 6: }{Momentos angulares de la Tierra por cada método (columna) y delta(fila)}
+\end{center}
+
+{En esta figura se puede ver que en todos los métodos y deltas se comporta de manera oscilatoria. En Euler se ve más uniforme para los tres deltas, Runge Kutta presenta un cambio en el último delta pero sigue teniendo un comportamiento aceptable, esto sucede también para Leap Frog}
+
+\begin{center}
+\includegraphics[width=17.5cm]{Ener_met_dt.pdf}    
+\\
+\textbf{Figura 7: }{Energía de la Tierra por cada método (columna) y delta(fila)}
+\end{center}
+
+{En la figura 7 se puede ver que la energía total del sistema se comporta de manera oscilatoria. Para Euler y Runge Kutta se puede ver el mismo comportamiento para los diferentes deltas, pero Leap Frog tiene un comportamiento más brusco teniendo picos de manera periodica}
+\end{document}
