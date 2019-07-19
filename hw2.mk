@@ -1,31 +1,7 @@
-FFT2D1-2.pdf: cara_03_grisesMF.png cara_02_grisesMF.png Fourier.py
+FFtIm.pdf ImProceso.pdf ImHybrid.pdf XY_met_dt.pdf VxVy_met_dt.pdf Mome_met_dt.pdf Ener_met_dt.pdf: Fourier.py Plots_hw2.py Euler1.dat LF1.dat RK1.dat Euler2.dat LF2.dat RK2.dat Euler3.dat LF3.dat RK3.dat
 	python Fourier.py
-    
-frecuencias.pdf: cara_03_grisesMF.png cara_02_grisesMF.png Fourier.py
-	python Fourier.py
-    
-filtros.pdf: cara_03_grisesMF.png cara_02_grisesMF.png Fourier.py
-	python Fourier.py
+	python Plots_hw2.py    
 
-filtradas.pdf: cara_03_grisesMF.png cara_02_grisesMF.png Fourier.py
-	python Fourier.py
-
-Primer_dt.pdf: Euler1.dat LF1.dat RK1.dat Plots_hw2.py ODEs.cpp 
-	python Plots_hw2.py
-%.dat: a.out
-	./a.out
-a.out: ODEs.cpp
-	g++ ODEs.cpp
-    
-Segundo_dt.pdf: Euler2.dat LF2.dat RK2.dat Plots_hw2.py ODEs.cpp 
-	python Plots_hw2.py
-%.dat: a.out
-	./a.out
-a.out: ODEs.cpp
-	g++ ODEs.cpp
-    
-Tercer_dt.pdf: Euler3.dat LF3.dat RK3.dat Plots_hw2.py ODEs.cpp
-	python Plots_hw2.py
 %.dat: a.out
 	./a.out
 a.out: ODEs.cpp
